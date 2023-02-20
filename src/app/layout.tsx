@@ -1,15 +1,13 @@
 import '../styles/global.css'
 
-import { Inter, JetBrains_Mono } from '@next/font/google'
+import { Inter } from '@next/font/google'
 
 import { Header } from '@/components/Header'
-
 import { Explorer } from '@/components/Explorer'
 import { Footer } from '@/components/Footer'
 import { Menu } from '@/components/Menu'
 
 const inter = Inter({ subsets: ['latin'] })
-const jetBrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export default function RootLayout({
   children,
