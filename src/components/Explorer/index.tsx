@@ -1,4 +1,4 @@
-import { Code2, Cog, Cpu, FileJson, Film, Joystick, MoreHorizontal, Terminal } from "lucide-react";
+import { Cog, Cpu, FileJson, MoreHorizontal, Terminal } from "lucide-react";
 import { File } from "./FIle";
 import { Folder } from "./Folder";
 
@@ -12,11 +12,6 @@ export function Explorer() {
 
             <nav className="mt-4 flex flex-col">
                 <Folder defaultOpen title="Visual Studio Code">
-                    <File href="/vscode/general">
-                        <Code2 size={16} />
-                        General
-                    </File>
-
                     <File href="/vscode/settings">
                         <FileJson size={16} />
                         settings.json
@@ -43,15 +38,6 @@ export function Explorer() {
                     <File href="/others/dev-setup">
                         <Cpu size={16} />
                         dev.setup
-                    </File>
-                    <File href="/others/gaming-setup">
-                        <Joystick size={16} />
-                        gaming.setup
-                    </File>
-
-                    <File href="/others/recording-setup">
-                        <Film size={16} />
-                        recording.setup
                     </File>
                 </Folder>
             </nav>
