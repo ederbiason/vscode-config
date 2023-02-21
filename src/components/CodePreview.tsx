@@ -13,14 +13,13 @@ interface CodePreviewProps {
 }
 
 export function CodePreview({ code, raw }: CodePreviewProps) {
-  const [hasCopiedToClipboard, setHasCopiedToClipboard] = useState(false)
+  const [hasCopiedToClipboard, setCopiedToClipboard] = useState(false)
 
   const handleCopyToClipboard = () => {
     if (!raw) return
-
     navigator.clipboard.writeText(raw)
-    setHasCopiedToClipboard(true)
-    setTimeout(() => setHasCopiedToClipboard(false), 2000)
+    setCopiedToClipboard(true)
+    setTimeout(() => setCopiedToClipboard(false), 2000)
   }
 
   return (
@@ -39,7 +38,7 @@ export function CodePreview({ code, raw }: CodePreviewProps) {
               </>
             ) : (
               <>
-                <CopyIcon size={16} className="text-emerald-400" />
+                <CopyIcon size={16} />
                 <span className="w-32">Copy to Clipboard</span>
               </>
             )
@@ -49,7 +48,7 @@ export function CodePreview({ code, raw }: CodePreviewProps) {
       <div
         id="shiki-code"
         style={jetBrainsMono.style}
-        className="inset-0 overflow-auto leading-relaxed scrollbar scrollbar-thumb-[#2B283B] scrollbar-track-transparent"
+        className="absolute inset-0 overflow-auto leading-relaxed scrollbar scrollbar-thumb-[#2B283B] scrollbar-track-transparent"
         dangerouslySetInnerHTML={{ __html: code }}
       />
     </>

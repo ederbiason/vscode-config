@@ -9,6 +9,18 @@ import { Menu } from '@/components/Menu'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const metadata = {
+  title: {
+    default: 'Eder Biason',
+    template: '%s | Eder Biason'
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  description: "Front-end Developer"
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -26,7 +38,7 @@ export default function RootLayout({
               <Menu />
               <Explorer />
 
-              <div>
+              <div className="h-full relative">
                 {children}
               </div>
             </div>

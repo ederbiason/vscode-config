@@ -10,7 +10,7 @@ export async function GistContent({ gistUrl }: GistContentProps) {
     const settings = await settingsResponse.text()
 
     const highlighter = await shiki.getHighlighter({
-        theme: 'rose-pine-moon'
+        theme: 'rose-pine-moon',
     })
 
     const code = highlighter.codeToHtml(settings, { lang: 'json' })
