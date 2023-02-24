@@ -5,7 +5,7 @@ const notion = new Client({
     auth: process.env.NOTION_API_KEY
 })
 
-export default async function getNotionPageContent(pageId: string) {
+export async function getNotionPageContent(pageId: string) {
     const { results } = await notion.blocks.children.list({
         block_id: pageId
     })
