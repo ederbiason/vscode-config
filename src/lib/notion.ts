@@ -12,8 +12,6 @@ export async function getNotionPageContent(pageId: string) {
 
     const codeBlock = results.find(block => isFullBlock(block) && block.type === "code") as CodeBlockObjectResponse | undefined
 
-    console.log(results)
-
     if(!codeBlock) {
         throw new Error(`Failed to fetch Notion content of ID: ${pageId}`)
     }
