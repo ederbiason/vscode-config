@@ -2,6 +2,8 @@ import { CodePreview } from '@/components/CodePreview'
 import { getNotionPageContent } from '@/lib/notion'
 import shiki from 'shiki'
 
+export const revalidate = 1800
+
 export const metadata = {
     title: 'Dev Setup'
 }
