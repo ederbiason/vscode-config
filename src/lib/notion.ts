@@ -20,3 +20,17 @@ export async function getNotionPageContent(pageId: string) {
 
     return { content: plain_text }
 }
+
+export async function getNotionTableTools() {
+    const databaseIdId = "4ecd9716ff4f492dbd41e9c0d6dfe0eb"
+
+    const { results } = await notion.databases.query({
+        database_id: databaseIdId
+    })
+
+    const content = results.map((result) => {
+        console.log(result)
+    })
+
+    return content
+}
