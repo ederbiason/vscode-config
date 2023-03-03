@@ -1,5 +1,5 @@
 import { Client, isFullBlock } from '@notionhq/client';
-import { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { CodeBlockObjectResponse, ColumnBlockObjectResponse, ColumnListBlockObjectResponse, ListBlockChildrenResponse, TableBlockObjectResponse, TableRowBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const notion = new Client({
     auth: process.env.NOTION_API_KEY
@@ -21,16 +21,25 @@ export async function getNotionPageContent(pageId: string) {
     return { content: plain_text }
 }
 
-export async function getNotionTableTools() {
-    const databaseIdId = "4ecd9716ff4f492dbd41e9c0d6dfe0eb"
+export async function getNotionTableTools(pageId: string) {
 
+    const { results } = await notion.blocks.children.list({
+        block_id: pageId
+    })
+
+    const tableBlock = results.find(block => isFullBlock(block)) as TableBlockObjectResponse
+
+    if(!tableBlock) {
+        throw new Error(`Failed to fetch Notion content of ID: ${pageId}`)
+    }
+
+    return { content: tableBlock }
+}
+
+export async function getNotionTableTools2(pageId: string) {
     const { results } = await notion.databases.query({
-        database_id: databaseIdId
+        database_id: pageId
     })
 
-    const content = results.map((result) => {
-        console.log(result)
-    })
-
-    return content
+    return { content: results }
 }
