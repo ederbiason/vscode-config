@@ -1,5 +1,6 @@
-import { Client, isFullBlock } from '@notionhq/client';
-import { CodeBlockObjectResponse, ColumnBlockObjectResponse, ColumnListBlockObjectResponse, ListBlockChildrenResponse, TableBlockObjectResponse, TableRowBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { RowsStructure } from '@/@types/types';
+import { Client, isFullBlock, isFullPage } from '@notionhq/client';
+import { CodeBlockObjectResponse, DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const notion = new Client({
     auth: process.env.NOTION_API_KEY
@@ -21,25 +22,37 @@ export async function getNotionPageContent(pageId: string) {
     return { content: plain_text }
 }
 
-export async function getNotionTableTools(pageId: string) {
-
-    const { results } = await notion.blocks.children.list({
-        block_id: pageId
-    })
-
-    const tableBlock = results.find(block => isFullBlock(block)) as TableBlockObjectResponse
-
-    if(!tableBlock) {
-        throw new Error(`Failed to fetch Notion content of ID: ${pageId}`)
+type Row = { 
+    name: {
+        id: string,
+        title: {
+            text: {
+                content: string
+            }
+        }[]
     }
-
-    return { content: tableBlock }
+    description: {
+        id: string,
+        rich_text: {
+            text: {
+                content: string
+            }
+        }[]
+    }
 }
 
-export async function getNotionTableTools2(pageId: string) {
+export async function getNotionTableTools(pageId: string) {
     const { results } = await notion.databases.query({
         database_id: pageId
     })
 
-    return { content: results }
+    // @ts-ignore
+    const rows = results.map((res) => res.properties) as Row[]
+
+    const rowsStructure: RowsStructure = rows.map((row) => ({
+        name: row.name.title[0].text.content,
+        description: row.description.rich_text[0].text.content
+    }))
+
+    return { content: JSON.stringify(rowsStructure) }
 }
