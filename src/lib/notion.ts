@@ -39,6 +39,10 @@ type Row = {
             }
         }[]
     }
+    url: {
+        id: string
+        url: string
+    }
 }
 
 export async function getNotionTableTools(pageId: string) {
@@ -52,7 +56,8 @@ export async function getNotionTableTools(pageId: string) {
     const rowsStructure: RowsStructure = rows.map((row) => ({
         id: row.name.id,
         name: row.name.title[0].text.content,
-        description: row.description.rich_text[0].text.content
+        description: row.description.rich_text[0].text.content,
+        url: row.url.url
     }))
 
     return { content: rowsStructure }
