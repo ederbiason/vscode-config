@@ -1,4 +1,4 @@
-import { Cog, Cpu, FileJson, MoreHorizontal, Terminal } from "lucide-react";
+import { Cog, Cpu, FileJson, MoreHorizontal, Terminal, Wrench } from "lucide-react";
 import { File } from "./FIle";
 import { Folder } from "./Folder";
 
@@ -38,6 +38,11 @@ export function Explorer() {
                     <File href="/others/dev-setup">
                         <Cpu size={16} />
                         dev.setup
+                    </File>
+
+                    <File href="/others/tools">
+                        <Wrench size={16} />
+                        dev.tools
                     </File>
                 </Folder>
             </nav>

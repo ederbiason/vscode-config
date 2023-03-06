@@ -50,9 +50,10 @@ export async function getNotionTableTools(pageId: string) {
     const rows = results.map((res) => res.properties) as Row[]
 
     const rowsStructure: RowsStructure = rows.map((row) => ({
+        id: row.name.id,
         name: row.name.title[0].text.content,
         description: row.description.rich_text[0].text.content
     }))
 
-    return { content: JSON.stringify(rowsStructure) }
+    return { content: rowsStructure }
 }

@@ -38,7 +38,7 @@ export default function RootLayout({
               <Menu />
               <Explorer />
 
-              <div className="h-full relative">
+              <div className="w-full h-full relative">
                 {children}
               </div>
             </div>
