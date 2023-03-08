@@ -1,5 +1,11 @@
 import { getNotionTableTools } from '@/lib/notion'
 
+export const revalidate = 1800
+
+export const metadata = {
+    title: 'Tools',
+}
+
 export default async function Tools() {
     const pageId = "efbf821c08ff4b9ca12e72ce5b942936"
     const { content } = await getNotionTableTools(pageId)
